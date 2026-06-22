@@ -4,7 +4,7 @@ const messageService = require("../modules/chat/messageService");
 const initializeSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: "https://social-media-frontend-ochre-five.vercel.app",
+            origin: process.env.CLIENT_URL,
             credentials:true
         }
     });
