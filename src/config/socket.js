@@ -33,7 +33,7 @@ const initializeSocket = (server) => {
         socket.on("markSeen", async (data) => {
             try {
                 await messageService.markMessagesSeen(data.conversationId, data.userId);
-                io.to(data.conversationId).emait("messagesSeenUpdate", {
+                io.to(data.conversationId).emit("messagesSeenUpdate", {
                     conversationId: data.conversationId,
                     seenBy: data.userId
                 })
