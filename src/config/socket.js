@@ -4,7 +4,7 @@ const messageService = require("../modules/chat/messageService");
 const initializeSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: "http://localhost:5173"
+            origin: process.env.CLIENT_URL
         }
     });
     io.on("connection", (socket) => {
