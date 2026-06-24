@@ -15,7 +15,7 @@ const initializeSocket = (server) => {
                 socket.join(conversationId);
                 console.log(`socket ${socket.id} joined conversation ${conversationId}`);
             });
-        socket.on("sendMessage", async (data) => {
+        socket.on("sendMessage", async (data,callback) => {
             try {
                 const message = await messageService.sendMessage(
                     data.conversationId,
@@ -24,10 +24,12 @@ const initializeSocket = (server) => {
                 );
                 await message.populate("sender", "_id username profilePicture")
                 io.to(data.conversationId).emit("receiveMessage", message);
+                if(callback) callback();
             } catch (error) {
                 socket.emit("messageError", {
                     message: error.message
                 });
+                if(callback) callback();
             }
         });
         socket.on("markSeen", async (data) => {
