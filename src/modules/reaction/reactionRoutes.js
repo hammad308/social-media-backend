@@ -4,7 +4,7 @@ const express= require("express");
 
 const router= express.Router();
 
-router.get("/posts/:id/reactions",reactionController.getReactionsByPost);
+router.get("/posts/:id/reactions",protect,reactionController.getReactionsByPost);
 
 router.post("/posts/:id/reactions",protect,reactionController.reactToPost);
 
