@@ -5,7 +5,7 @@ const router= express.Router();
 
 router.post("/posts/:id/comments",protect,commentController.createComment);
 
-router.get("/posts/:id/comments",commentController.getCommentsByPost);
+router.get("/posts/:id/comments",protect,commentController.getCommentsByPost);
 
 router.delete("/comments/:commentId",protect,commentController.deleteComment);
 
